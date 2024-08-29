@@ -1,7 +1,7 @@
 numeri=[]
 while True:
  q= int(input("Scegli un numero: "))
- if q > 1:
+ if q > 1:# questa funzione è stata trovata online e solo leggermente modificata :)
     for i in range(2, int(q / 2) + 1):
         if (q % i) == 0:
             print("Hai scelto un non primo")
