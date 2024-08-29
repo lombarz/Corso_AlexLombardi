@@ -1,2 +1,2 @@
 # Corso_AlexLombardi
-Academy Experis, perosnale di Lombardi Alex
+Academy Experis, personale di Lombardi Alex
