@@ -1,11 +1,11 @@
 def decoratore(funzione):
-   def avvolgimento(*args):
+   def avvolgimento(stringa):
       print("Attesa calcoli")
-      risultato=funzione(*args)
-      if risultato == args:
+      risultato=funzione(stringa)
+      if risultato == stringa:
          print("L'algoritmo di compressione non è efficiente, restituzione stringa originale")
       else:
-         print ("Hai cambiato la stringa! Stringa originale: ", args)
+         print ("Hai cambiato la stringa! Stringa originale: ", stringa)
       return risultato
    return avvolgimento
 
@@ -20,6 +20,8 @@ def comprimi_stringa(stringa):
       else:
          stringa2+=stringa[i-1]+f"{count}"
          count=1
+    if count==leng:
+       stringa2= stringa[0]+f"{leng}"
     if stringa[leng-1]!=stringa[leng-2]:
         stringa2+=stringa[leng-1]+"1"
     else:
