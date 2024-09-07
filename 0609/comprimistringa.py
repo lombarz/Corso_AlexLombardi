@@ -11,30 +11,22 @@ def decoratore(funzione):
 
 @decoratore
 def comprimi_stringa(stringa):
+    stringa+=" "#aggiungo uno spazio in fondo a stringa per togliermi un problema di iterazione sul ciclo for
     stringa2=""
     leng=len(stringa)
     count=1
-    for i in range(1,leng):
+    for i in range(1,leng):#così il ciclo for è pù semplice
       if stringa[i]==stringa[i-1]:
         count+=1
       else:
          stringa2+=stringa[i-1]+f"{count}"
          count=1
-    if count==leng:
-       stringa2= stringa[0]+f"{leng}"
-    if stringa[leng-1]!=stringa[leng-2]:
-        stringa2+=stringa[leng-1]+"1"
-    else:
-       count=1
-       for i in range(leng-1,0,-1):
-         if stringa[i]==stringa[i-1]:
-           count+=1
-         else:
-           stringa2+=stringa[i]+f"{count}"
-           break
+    stringa= stringa[:-1]#rimuovo lo spazio aggiunto
     if len(stringa2)>=leng:
        return stringa
     else:
-       return stringa2
-frase=input("Inserisci frase: ")
+       return stringa2 
+    
+
+frase=input("Inserisci stringa di caratteri: ")
 print(comprimi_stringa(frase))
