@@ -1,0 +1,5 @@
+nome,cognome,via
+Alex,Lombardi,via Pala 22
+Aldo,Perri, via dal cazzo 69
+Alessio,Manfredi,sconosicuta
+Alessio,Manfredi,sconosicuta
