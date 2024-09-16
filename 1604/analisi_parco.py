@@ -1,3 +1,4 @@
+#per la parte grafica è stato fatto largo uso di chatgpt
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
