@@ -16,13 +16,8 @@ def estrazione_sottomatrice(matrice):
     sottomatrice_centrale = matrice[start_row:start_row + m, start_col:start_col + n]
     return sottomatrice_centrale
 def trasposta(matrice):
-    righe,colonne=matrice.shape
-    matrice_nuova= np.zeros((righe,colonne))
-    matrice_nuova=matrice_nuova.reshape((colonne,righe))
-    for i in range(righe):
-        for j in range(colonne):
-            matrice_nuova[j][i]=matrice[i][j]
-    return matrice_nuova
+    transposta=matrice.T
+    return transposta
 def somma_matrix(matrice):
     righe,colonne=matrice.shape
     matrice3=matrice
@@ -49,7 +44,7 @@ def determinante(matrice):
     righe,colonne=matrice.shape
     if righe==colonne:
         determinante = np.linalg.det(matrice)
-        return determinante
+        print("Il determinante è",determinante)
     else:
         print("la matrice non è quadrata")
 def traccia(matrice):
@@ -57,10 +52,10 @@ def traccia(matrice):
     traccia=0
     if righe<colonne:
       for k in range(righe):
-         traccia+=matrice[k][k]
+          traccia+=matrice[k][k]
     else:
         for k in range(colonne):
-         traccia+=matrice[k][k]
+          traccia+=matrice[k][k]
     return traccia
 
     
@@ -107,13 +102,12 @@ while True:
     elif scelta=='7':
         try:
             track=traccia(matrix)
-            print("La traccia è",mean)
+            print("La traccia è", track)
         except:
             print("non hai ancora una matrice, prima devi crearla")
     elif scelta=='8':
         try:
-            det=determinante(matrix)
-            print("Il determinante è",det)
+            determinante(matrix)
         except:
             print("non hai ancora una matrice, prima devi crearla")
     else:
