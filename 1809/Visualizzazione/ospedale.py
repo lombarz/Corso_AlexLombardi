@@ -23,9 +23,9 @@ for n in range(365):
       vis_intero = int(round(visitatori))
       if vis_intero <0:
           vis_intero=0
-      ossa=np.random.randint(0,vis_intero+1)
-      cuore= np.random.randint(0,vis_intero+1-ossa)
-      testa=np.random.randint(0,vis_intero+1-ossa-cuore)
+      ossa=np.random.randint(0,vis_intero)
+      cuore= np.random.randint(0,vis_intero-ossa)
+      testa=vis_intero-ossa-cuore
       distribuzione = {"giorno": giorno_corrente, "pazienti": vis_intero,"ossa":ossa,"cuore":cuore,"testa":testa}
       data.append(distribuzione)
 
