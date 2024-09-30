@@ -8,6 +8,8 @@ import os
 os.environ["OPENAI_API_KEY"] = "test_prova"
 #Creiamo un semplice documento da utilizzare:
 print('Chatbot sui sottogeneri del metal:\n')
+#query = input('Domanda: \n')
+query= 'Qual è il sottogenere del metal più vicino al satanismo?'
 
 trash_metal = """
 Il thrash metal, una delle prime evoluzioni dell'heavy metal e prima forma di metal estremo 
@@ -23,13 +25,31 @@ death_metal="""Nato a metà anni ottanta, il death metal è un altro genere rien
 doom_metal="""È il genere più cupo della storia dell'heavy metal, di cui sono considerati precursori anche gli stessi Black Sabbath. Il tipico sound doom metal è caratterizzato da linee di batteria molto lente, cadenzate e sinistre; l'uso della doppia cassa si riduce al minimo e le ritmiche chitarristiche presentano un suono molto oscuro. Grande importanza, per lo sviluppo del genere, hanno rivestito le tastiere, che contribuirono a sprigionare atmosfere sulfuree e d'effetto, il tutto condito da testi che trattano spesso il tema dell'occulto, della sofferenza, dell'odio o del satanismo. Tra i maggiori esponenti di questo genere musicale si possono annoverare: i Paradise Lost, gli Anathema e i My Dying Bride che sono considerati una sorta di "magico trio" che ha contribuito a rendere famoso il doom a livello internazionale; oltre a Moonspell, Electric Wizard, Type O Negative, Tiamat, Candlemass, Cathedral, Pentagram."""
 metal_core="""Nella seconda metà degli anni 2000 si è affermato il metalcore, derivato dalla fusione di alcune forme estreme del metal con elementi hardcore punk. Il genere si sviluppò in forma underground negli anni ottanta e novanta, inaugurato da gruppi come Earth Crisis, Converge, Hatebreed e Shai Hulud."""
 lista_metal=[black_metal,death_metal,doom_metal,trash_metal,metal_core]
+#creiamo una lista più specifica nel caso ci sia la presenza di più parole chiave
+lista_specifica=[]
+if 'black' in query or 'satanismo' in query:
+   lista_specifica.append(black_metal)
+if 'doom' in query or 'black sabbath' in query:
+   lista_specifica.append(doom_metal)
+if 'death' in query:
+   lista_specifica.append(death_metal)
+if 'thrash' in query or 'metallica' in query:
+   lista_specifica.append(trash_metal)
+if 'core' in query or 'watching the abyss' in query:
+   lista_specifica.append(metal_core)
+#scegliamo la lista più appropriata da usare 
+if len(lista_specifica)==0:
+   lista_da_usare=lista_metal
+else:
+   lista_da_usare=lista_specifica
 #Suddividiamo il documento in parti gestibili:
 texts_list=[]
-for elemento in lista_metal:
+for elemento in lista_da_usare:
   text_splitter = CharacterTextSplitter(chunk_size=200, chunk_overlap=0)
   texts = text_splitter.split_text(elemento)
   texts_list.append(texts)
 #Creiamo gli embeddings per i chunk di testo e costruiamo l'archivio vettoriale:
+
 embeddings = OpenAIEmbeddings()
 vectorstore_list=[]
 for pezzo in texts_list:
@@ -49,8 +69,8 @@ for vs in vectorstore_list[1:]:
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=merged_vectorstore.as_retriever())#DA REPLICARE
 #Eseguiamo una query per vedere il sistema in azione:
 
-#query = input('Domanda: \n')
-query= 'Qual è il sottogenere del metal più vicino al satanismo?'
+
 risposta = qa.run(query)
 print("la tua domanda era:", query)
 print("Risposta:", risposta)
+
